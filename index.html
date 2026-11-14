@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>John Ogletree — Links</title>
   <style>
+    /* Theme & Color Tokens */
     :root {
       --bg: #0a0a0a;
       --surface: #141414;
@@ -14,6 +15,7 @@
       --text-secondary: #888888;
     }
 
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -31,6 +33,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Layout Container */
     .container {
       width: 100%;
       max-width: 440px;
@@ -39,16 +42,7 @@
       align-items: center;
     }
 
-    .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--border);
-      margin-bottom: 16px;
-      background-color: var(--surface);
-    }
-
+    /* Profile Header */
     .name {
       font-size: 1.25rem;
       font-weight: 600;
@@ -65,6 +59,7 @@
       max-width: 340px;
     }
 
+    /* Primary Link Cards */
     .links {
       width: 100%;
       display: flex;
@@ -97,6 +92,7 @@
       transform: translateY(0);
     }
 
+    /* Social & Support Footer Links */
     .socials {
       display: flex;
       gap: 20px;
@@ -117,20 +113,21 @@
 </head>
 <body>
   <main class="container">
-    <img class="avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB9AAAAfQCAYAAACaOMR5AAAA2GVYSWZJSSoACAAAAAgAGwEFAAEAAABuAAAAGgEFAAEAAAB2AAAAAAEEAAEAAADQBwAAAQEEAAEAAADQBwAAEwIDAAEAAAABAAAAaYcEAAEAAAB+AAAAEgEDAAEAAAABAAAAKAEDAAEAAAACAAAAAAAAAGAAAAABAAAAYAAAAAEAAAAHAACQAgAEAAAAMDIxMACgBwAEAAAAMDEwMAGgAwABAAAA//8AAAKgBAABAAAA0AcAAAGRBwAEAAAAAQIDAAOgBAABAAAA0AcAAAiSBAABAAAAAAAAAAAAAABiIAefAAAACXBIWXMAAA7EAAAOxAGVKw4bAAANmWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSI/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIFRlc3QuU05BUFNIT1QiPgogIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgIHhtbG5zOkF0dHJpYj0iaHR0cDovL25zLmF0dHJpYnV0aW9uLmNvbS9hZHMvMS4wLyIKICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICAgICB4bXA6Q3JlYXRvclRvb2w9IkNhbnZhIGRvYz1EQUhUbjdYRzZwSSB1c2VyPVVBRG5uX050Q2VJIGJyYW5kPUpvaG4gT2dsZXRyZWUiPgogICAgICA8QXR0cmliOkFkcz4KICAgICAgICA8cmRmOlNlcT4KICAgICAgICAgIDxyZGY6bGkKICAgICAgICAgICAgQXR0cmliOkNyZWF0ZWQ9IjIwMjYtMTEtMTQiCiAgICAgICAgICAgIEF0dHJpYjpEYXRhPSJ7JnF1b3Q7ZG9jJnF1b3Q7OiZxdW90O0RBSFRuN1hHNnBJJnF1b3Q7LCZxdW90O3VzZXImcXVvdDs6JnF1b3Q7VUFEbm5fTnRDZUkmcXVvdDssJnF1b3Q7YnJhbmQmcXVvdDs6JnF1b3Q7Sm9obiBPZ2xldHJlZSZxdW90O30iCiAgICAgICAgICAgIEF0dHJpYjpFeHRJZD0iOTY3NjI0ODktMjQ0YS00M2VlLThkOTctYjk3MWNjZTJlMzJmIgogICAgICAgICAgICBBdHJpYjpGbklkPSI1MjUyNjU5MTQxNzk1ODAiCiAgICAgICAgICAgIEF0dHJpYjpUb3VjaFR5cGU9IjIiLz4KICAgICAgICAgIDxyZGY6bGkKICAgICAgICAgICAgQXR0cmliOkZiSWQ9IjUyNTI2NTkxNDE3OTU4MCIKICAgICAgICAgICAgQXR0cmliOkNyZWF0ZWQ9IjIwMjYtMTEtMTQiCiAgICAgICAgICAgIEF0dHJpYjpUb3VjaFR5cGU9IjIiCiAgICAgICAgICAgIEF0dHJpYjpFeHRJZD0iZTFjMzJiN2EtNmM4NC00Y2VlLWE5MjgtZmI1YzNjMTQ4MzM5Ii8+CiAgICAgICAgPC9yZGY6U2VxPgogIC      wvQXR0cmliOkFkcz4KICAgICAgPGRjOnRpdGxlPgogICAgICAgIDxyZGY6QWx0PgogICAgICAgICAgcmRmOmxpIHhtbDpsYW5nPSJ4LWRlZmF1bHQiPiAgLSAxPC9yZGY6bGk+CiAgICAgICAgPC9yZGY6QWx0PgogIC      sJY3JlYXRvcj4KICAgICAgICA8cmRmOlNlcT4KICAgICAgICAgIDxyZGY6bGk+am9obiBvZ2xldHJlZTwvcmRmOmxpPgogICAgICAgIDwvcmRmOlNlcT4KICAgICAgPC9kYzpjcmVhdG9yPgog" alt="John Ogletree" />
-
+    <!-- Header Section -->
     <h1 class="name">John Ogletree</h1>
-    <p class="bio">Independent developer, designer, and creator[span_0](start_span)[span_0](end_span).</p>
+    <p class="bio">Independent developer, designer, and creator.</p>
 
+    <!-- Primary Links -->
     <div class="links">
-      <a class="link-card" href="https://jao.life" target="_blank" rel="noopener">Website[span_1](start_span)[span_1](end_span)</a>
-      <a class="link-card" href="https://github.com/john0ogletree" target="_blank" rel="noopener">GitHub[span_2](start_span)[span_2](end_span)</a>
+      <a class="link-card" href="https://jao.life" target="_blank" rel="noopener">Website</a>
+      <a class="link-card" href="https://github.com/john0ogletree" target="_blank" rel="noopener">GitHub</a>
     </div>
 
+    <!-- Social Links -->
     <div class="socials">
-      <a href="https://bsky.app/profile/jao.life" target="_blank" rel="noopener">Bluesky[span_3](start_span)[span_3](end_span)</a>
-      <a href="https://twitch.tv/john00ogletree" target="_blank" rel="noopener">Twitch[span_4](start_span)[span_4](end_span)</a>
-      <a href="https://buymeacoffee.com/john0ogletree" target="_blank" rel="noopener">Support[span_5](start_span)[span_5](end_span)</a>
+      <a href="https://bsky.app/profile/jao.life" target="_blank" rel="noopener">Bluesky</a>
+      <a href="https://twitch.tv/john00ogletree" target="_blank" rel="noopener">Twitch</a>
+      <a href="https://buymeacoffee.com/john0ogletree" target="_blank" rel="noopener">Support</a>
     </div>
   </main>
 </body>
