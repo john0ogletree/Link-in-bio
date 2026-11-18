@@ -167,6 +167,25 @@
       transform: translateY(0);
     }
 
+    .link-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: column;
+      gap: 4px;
+      background-color: #181c1a;
+      border-color: #2c3e35;
+    }
+
+    .link-card.featured:hover {
+      background-color: #1f2622;
+      border-color: #3f5c4e;
+    }
+
+    .link-subtext {
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
     /* Smartwatch & Ultra-Small Viewports (< 240px) */
     @media (max-width: 240px) {
       body {
@@ -245,6 +264,10 @@
 
   <!-- Primary Links -->
   <div class="links" id="linksGrid">
+    <a class="link-card featured" href="https://gofund.me/aa3f416ff" target="_blank" rel="noopener">
+      <span>Support Marcel's Family</span>
+      <span class="link-subtext">GoFundMe for his wife &amp; kids after his cancer loss</span>
+    </a>
     <a class="link-card" href="https://jao.life" target="_blank" rel="noopener">Website</a>
     <a class="link-card" href="https://github.com/john0ogletree" target="_blank" rel="noopener">GitHub</a>
     <a class="link-card" href="https://bsky.app/profile/jao.life" target="_blank" rel="noopener">Bluesky</a>
