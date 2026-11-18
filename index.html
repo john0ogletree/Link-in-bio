@@ -50,8 +50,82 @@
       color: var(--text-secondary);
       text-align: center;
       line-height: 1.45;
-      margin-bottom: clamp(20px, 5vw, 40px);
+      margin-bottom: clamp(16px, 4vw, 28px);
       max-width: min(90vw, 460px);
+    }
+
+    /* Search Bar */
+    .search-container {
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: clamp(14px, 3vw, 24px);
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: clamp(12px, 3vw, 18px);
+      width: clamp(15px, 3vw, 18px);
+      height: clamp(15px, 3vw, 18px);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 44px;
+      padding: clamp(10px, 2.5vw, 14px) clamp(36px, 8vw, 44px);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: clamp(8px, 2vw, 14px);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      outline: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-input:focus {
+      background-color: var(--surface-hover);
+      border-color: #4a4a4a;
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: clamp(10px, 2.5vw, 14px);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .clear-btn:hover {
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .clear-btn.visible {
+      display: flex;
+    }
+
+    .no-results {
+      display: none;
+      color: var(--text-secondary);
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      text-align: center;
+      padding: 24px 0;
     }
 
     /* Primary Link Cards */
@@ -104,6 +178,11 @@
         margin-bottom: 14px;
       }
 
+      .search-input {
+        min-height: 38px;
+        padding: 8px 30px;
+      }
+
       .links {
         grid-template-columns: 1fr;
       }
@@ -117,6 +196,7 @@
 
     /* Tablets & Small Laptops (768px+) */
     @media (min-width: 768px) {
+      .search-container,
       .links {
         max-width: 640px;
       }
@@ -124,6 +204,7 @@
 
     /* Large Desktops, 4K & Ultrawide Displays (1440px+) */
     @media (min-width: 1440px) {
+      .search-container,
       .links {
         max-width: 760px;
         gap: 16px;
@@ -140,8 +221,30 @@
   <h1 class="name">John Ogletree</h1>
   <p class="bio">Independent developer, designer, and creator.</p>
 
+  <!-- Search Bar -->
+  <div class="search-container">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="text"
+      id="linkSearch"
+      class="search-input"
+      placeholder="Search links..."
+      aria-label="Search links"
+      autocomplete="off"
+    />
+    <button type="button" id="clearSearch" class="clear-btn" aria-label="Clear search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
   <!-- Primary Links -->
-  <div class="links">
+  <div class="links" id="linksGrid">
     <a class="link-card" href="https://jao.life" target="_blank" rel="noopener">Website</a>
     <a class="link-card" href="https://github.com/john0ogletree" target="_blank" rel="noopener">GitHub</a>
     <a class="link-card" href="https://bsky.app/profile/jao.life" target="_blank" rel="noopener">Bluesky</a>
@@ -155,5 +258,42 @@
     <a class="link-card" href="https://patreon.com/John0ogletree" target="_blank" rel="noopener">Patreon</a>
     <a class="link-card" href="https://cash.app/$John0ogletree" target="_blank" rel="noopener">Cash App</a>
   </div>
+
+  <p class="no-results" id="noResults">No matching links found.</p>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById('linkSearch');
+      const clearBtn = document.getElementById('clearSearch');
+      const cards = document.querySelectorAll('.link-card');
+      const noResults = document.getElementById('noResults');
+
+      function filterLinks() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        clearBtn.classList.toggle('visible', query.length > 0);
+
+        cards.forEach((card) => {
+          const text = card.textContent.toLowerCase();
+          const href = card.getAttribute('href').toLowerCase();
+          const isMatch = text.includes(query) || href.includes(query);
+
+          card.style.display = isMatch ? 'flex' : 'none';
+          if (isMatch) visibleCount++;
+        });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      searchInput.addEventListener('input', filterLinks);
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterLinks();
+        searchInput.focus();
+      });
+    })();
+  </script>
 </body>
 </html>
