@@ -1,0 +1,3 @@
+[submodule "Icons"]
+	path = Icons
+	url = git@github.com:john0ogletree/Icons.git
