@@ -154,7 +154,7 @@
       font-weight: 500;
       line-height: 1.2;
       word-break: break-word;
-      transition: background-color 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      transition: background-color 0.15s ease, transform 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
     }
 
     .link-card:hover {
@@ -165,6 +165,14 @@
 
     .link-card:active {
       transform: translateY(0);
+    }
+
+    .link-card.disabled,
+    .link-card[aria-disabled="true"] {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
     }
 
     .link-card.featured {
@@ -276,7 +284,7 @@
     <a class="link-card" href="https://instagram.com/John0ogletree" target="_blank" rel="noopener">Instagram</a>
     <a class="link-card" href="https://threads.net/@John0ogletree" target="_blank" rel="noopener">Threads</a>
     <a class="link-card" href="https://tiktok.com/@John0ogletree" target="_blank" rel="noopener">TikTok</a>
-    <a class="link-card" href="https://youtube.com/@johnogletree-youtube" target="_blank" rel="noopener">YouTube</a>
+    <a class="link-card disabled" data-href="https://youtube.com/@johnogletree-youtube" aria-disabled="true" tabindex="-1">YouTube</a>
     <a class="link-card" href="https://twitch.tv/John0ogletree" target="_blank" rel="noopener">Twitch</a>
     <a class="link-card" href="https://substack.com/@John0ogletree" target="_blank" rel="noopener">Substack</a>
     <a class="link-card" href="https://patreon.com/John0ogletree" target="_blank" rel="noopener">Patreon</a>
@@ -303,7 +311,7 @@
 
         cards.forEach((card) => {
           const text = card.textContent.toLowerCase();
-          const href = card.getAttribute('href').toLowerCase();
+          const href = (card.getAttribute('href') || card.getAttribute('data-href') || '').toLowerCase();
           const isMatch = text.includes(query) || href.includes(query);
 
           card.style.display = isMatch ? 'flex' : 'none';
