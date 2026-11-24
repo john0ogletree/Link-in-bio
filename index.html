@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Ogletree — Links</title>
+  <style>
+    /* Theme & Color Tokens */
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface-hover: #1f1f1f;
+      --border: #262626;
+      --text-primary: #ededed;
+      --text-secondary: #888888;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 6vw, 80px) clamp(12px, 5vw, 32px);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Profile Header */
+    .name {
+      font-size: clamp(1.05rem, 3.5vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: clamp(4px, 1vw, 8px);
+    }
+
+    .bio {
+      font-size: clamp(0.75rem, 2.5vw, 1.05rem);
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.45;
+      margin-bottom: clamp(16px, 4vw, 28px);
+      max-width: min(90vw, 460px);
+    }
+
+    /* Search Bar */
+    .search-container {
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: clamp(14px, 3vw, 24px);
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: clamp(12px, 3vw, 18px);
+      width: clamp(15px, 3vw, 18px);
+      height: clamp(15px, 3vw, 18px);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 44px;
+      padding: clamp(10px, 2.5vw, 14px) clamp(36px, 8vw, 44px);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: clamp(8px, 2vw, 14px);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      outline: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-input:focus {
+      background-color: var(--surface-hover);
+      border-color: #4a4a4a;
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: clamp(10px, 2.5vw, 14px);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .clear-btn:hover {
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .clear-btn.visible {
+      display: flex;
+    }
+
+    .no-results {
+      display: none;
+      color: var(--text-secondary);
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    /* Primary Link Cards */
+    .links {
+      width: 100%;
+      max-width: 560px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(8px, 2vw, 14px);
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      width: 100%;
+      min-height: 44px;
+      padding: clamp(10px, 2.5vw, 16px) clamp(12px, 3vw, 24px);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: clamp(8px, 2vw, 14px);
+      color: var(--text-primary);
+      text-decoration: none;
+      text-align: center;
+      font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+      font-weight: 500;
+      line-height: 1.2;
+      word-break: break-word;
+      transition: background-color 0.15s ease, transform 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .link-card:hover {
+      background-color: var(--surface-hover);
+      border-color: #3a3a3a;
+      transform: translateY(-1px);
+    }
+
+    .link-card:active {
+      transform: translateY(0);
+    }
+
+    .link-card.disabled,
+    .link-card[aria-disabled="true"] {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
+    }
+
+    .link-card.featured {
+      grid-column: 1 / -1;
+      gap: 4px;
+      background-color: #181c1a;
+      border-color: #2c3e35;
+    }
+
+    .link-card.featured:hover {
+      background-color: #1f2622;
+      border-color: #3f5c4e;
+    }
+
+    .link-subtext {
+      font-size: clamp(0.66rem, 1.8vw, 0.8rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    /* Smartwatch & Ultra-Small Viewports (< 240px) */
+    @media (max-width: 240px) {
+      body {
+        justify-content: flex-start;
+        padding: 14px 10px 24px;
+      }
+
+      .bio {
+        margin-bottom: 14px;
+      }
+
+      .search-input {
+        min-height: 38px;
+        padding: 8px 30px;
+      }
+
+      .links {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        min-height: 38px;
+        padding: 9px 10px;
+        border-radius: 10px;
+      }
+    }
+
+    /* Tablets & Small Laptops (768px+) */
+    @media (min-width: 768px) {
+      .search-container,
+      .links {
+        max-width: 640px;
+      }
+    }
+
+    /* Large Desktops, 4K & Ultrawide Displays (1440px+) */
+    @media (min-width: 1440px) {
+      .search-container,
+      .links {
+        max-width: 760px;
+        gap: 16px;
+      }
+
+      .link-card {
+        padding: 18px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <h1 class="name">John Ogletree</h1>
+  <p class="bio">Independent developer, designer, and creator.</p>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="text"
+      id="linkSearch"
+      class="search-input"
+      placeholder="Search links..."
+      aria-label="Search links"
+      autocomplete="off"
+    />
+    <button type="button" id="clearSearch" class="clear-btn" aria-label="Clear search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Primary Links -->
+  <div class="links" id="linksGrid">
+    <a class="link-card featured" href="https://gofund.me/aa3f416ff" target="_blank" rel="noopener">
+      <span>Support Marcel's Family</span>
+      <span class="link-subtext">GoFundMe for his wife &amp; kids after his cancer loss</span>
+    </a>
+    <a class="link-card" href="https://jao.life" target="_blank" rel="noopener">
+      <span>Website</span>
+      <span class="link-subtext">Build · Apple Pie</span>
+    </a>
+    <a class="link-card" href="https://github.com/john0ogletree" target="_blank" rel="noopener">
+      <span>GitHub</span>
+      <span class="link-subtext">Build · Banana Bread</span>
+    </a>
+    <a class="link-card" href="https://bsky.app/profile/jao.life" target="_blank" rel="noopener">
+      <span>Bluesky</span>
+      <span class="link-subtext">Build · Cupcake</span>
+    </a>
+    <a class="link-card" href="https://facebook.com/John0ogletree" target="_blank" rel="noopener">
+      <span>Facebook</span>
+      <span class="link-subtext">Build · Donut</span>
+    </a>
+    <a class="link-card" href="https://x.com/John0ogletree" target="_blank" rel="noopener">
+      <span>X (Twitter)</span>
+      <span class="link-subtext">Build · Eclair</span>
+    </a>
+    <a class="link-card" href="https://instagram.com/John0ogletree" target="_blank" rel="noopener">
+      <span>Instagram</span>
+      <span class="link-subtext">Build · Froyo</span>
+    </a>
+    <a class="link-card" href="https://threads.net/@John0ogletree" target="_blank" rel="noopener">
+      <span>Threads</span>
+      <span class="link-subtext">Build · Gingerbread</span>
+    </a>
+    <a class="link-card" href="https://tiktok.com/@John0ogletree" target="_blank" rel="noopener">
+      <span>TikTok</span>
+      <span class="link-subtext">Build · Honeycomb</span>
+    </a>
+    <a class="link-card disabled" data-href="https://youtube.com/@johnogletree-youtube" aria-disabled="true" tabindex="-1">
+      <span>YouTube</span>
+      <span class="link-subtext">Build · Ice Cream Sandwich</span>
+    </a>
+    <a class="link-card" href="https://twitch.tv/John00ogletree" target="_blank" rel="noopener">
+      <span>Twitch</span>
+      <span class="link-subtext">Build · Jelly Bean</span>
+    </a>
+    <a class="link-card" href="https://substack.com/@John0ogletree" target="_blank" rel="noopener">
+      <span>Substack</span>
+      <span class="link-subtext">Build · KitKat</span>
+    </a>
+    <a class="link-card" href="https://patreon.com/John0ogletree" target="_blank" rel="noopener">
+      <span>Patreon</span>
+      <span class="link-subtext">Build · Lollipop</span>
+    </a>
+    <a class="link-card" href="https://cash.app/$John0ogletree" target="_blank" rel="noopener">
+      <span>Cash App</span>
+      <span class="link-subtext">Build · Marshmallow</span>
+    </a>
+    <a class="link-card" href="https://chime.com/pay/$John0ogletree" target="_blank" rel="noopener">
+      <span>Chime</span>
+      <span class="link-subtext">Build · Nougat</span>
+    </a>
+    <a class="link-card" href="https://venmo.com/u/John0ogletree" target="_blank" rel="noopener">
+      <span>Venmo</span>
+      <span class="link-subtext">Build · Oreo</span>
+    </a>
+    <a class="link-card" href="https://paypal.me/John0ogletree" target="_blank" rel="noopener">
+      <span>PayPal</span>
+      <span class="link-subtext">Build · Pie</span>
+    </a>
+  </div>
+
+  <p class="no-results" id="noResults">No matching links found.</p>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById('linkSearch');
+      const clearBtn = document.getElementById('clearSearch');
+      const cards = document.querySelectorAll('.link-card');
+      const noResults = document.getElementById('noResults');
+
+      function filterLinks() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        clearBtn.classList.toggle('visible', query.length > 0);
+
+        cards.forEach((card) => {
+          const text = card.textContent.toLowerCase();
+          const href = (card.getAttribute('href') || card.getAttribute('data-href') || '').toLowerCase();
+          const isMatch = text.includes(query) || href.includes(query);
+
+          card.style.display = isMatch ? 'flex' : 'none';
+          if (isMatch) visibleCount++;
+        });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      searchInput.addEventListener('input', filterLinks);
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterLinks();
+        searchInput.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
