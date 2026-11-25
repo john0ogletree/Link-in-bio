@@ -27,38 +27,37 @@
       color: var(--text-primary);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
       min-height: 100dvh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: clamp(16px, 6vw, 80px) clamp(12px, 5vw, 32px);
+      padding: clamp(16px, 4vw, 64px) clamp(12px, 3vw, 48px);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
     /* Profile Header */
     .name {
-      font-size: clamp(1.05rem, 3.5vw, 1.75rem);
+      font-size: clamp(1.1rem, 2.8vw, 3.25rem);
       font-weight: 600;
       letter-spacing: -0.02em;
       text-align: center;
-      margin-bottom: clamp(4px, 1vw, 8px);
+      margin-bottom: clamp(4px, 0.8vw, 14px);
     }
 
     .bio {
-      font-size: clamp(0.75rem, 2.5vw, 1.05rem);
+      font-size: clamp(0.8rem, 1.5vw, 1.65rem);
       color: var(--text-secondary);
       text-align: center;
       line-height: 1.45;
-      margin-bottom: clamp(16px, 4vw, 28px);
-      max-width: min(90vw, 460px);
+      margin-bottom: clamp(16px, 2.5vw, 40px);
     }
 
     /* Search Bar */
     .search-container {
       width: 100%;
-      max-width: 560px;
-      margin-bottom: clamp(14px, 3vw, 24px);
+      margin-bottom: clamp(14px, 2vw, 32px);
       position: relative;
       display: flex;
       align-items: center;
@@ -66,23 +65,23 @@
 
     .search-icon {
       position: absolute;
-      left: clamp(12px, 3vw, 18px);
-      width: clamp(15px, 3vw, 18px);
-      height: clamp(15px, 3vw, 18px);
+      left: clamp(12px, 1.6vw, 24px);
+      width: clamp(15px, 1.6vw, 26px);
+      height: clamp(15px, 1.6vw, 26px);
       color: var(--text-secondary);
       pointer-events: none;
     }
 
     .search-input {
       width: 100%;
-      min-height: 44px;
-      padding: clamp(10px, 2.5vw, 14px) clamp(36px, 8vw, 44px);
+      min-height: clamp(42px, 4vw, 68px);
+      padding: clamp(10px, 1.4vw, 20px) clamp(36px, 4vw, 58px);
       background-color: var(--surface);
       border: 1px solid var(--border);
-      border-radius: clamp(8px, 2vw, 14px);
+      border-radius: clamp(8px, 1.2vw, 18px);
       color: var(--text-primary);
       font-family: inherit;
-      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      font-size: clamp(0.85rem, 1.35vw, 1.45rem);
       outline: none;
       transition: background-color 0.15s ease, border-color 0.15s ease;
     }
@@ -98,12 +97,12 @@
 
     .clear-btn {
       position: absolute;
-      right: clamp(10px, 2.5vw, 14px);
+      right: clamp(10px, 1.4vw, 20px);
       background: none;
       border: none;
       color: var(--text-secondary);
       cursor: pointer;
-      padding: 4px;
+      padding: clamp(4px, 0.5vw, 8px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -123,18 +122,17 @@
     .no-results {
       display: none;
       color: var(--text-secondary);
-      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      font-size: clamp(0.9rem, 1.4vw, 1.5rem);
       text-align: center;
-      padding: 24px 0;
+      padding: clamp(20px, 3vw, 48px) 0;
     }
 
     /* Primary Link Cards */
     .links {
       width: 100%;
-      max-width: 560px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: clamp(8px, 2vw, 14px);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(8px, 1.2vw, 22px);
     }
 
     .link-card {
@@ -142,17 +140,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: clamp(3px, 0.35vw, 6px);
       width: 100%;
-      min-height: 44px;
-      padding: clamp(10px, 2.5vw, 16px) clamp(12px, 3vw, 24px);
+      min-height: clamp(44px, 5vw, 96px);
+      padding: clamp(10px, 1.6vw, 28px) clamp(12px, 2vw, 36px);
       background-color: var(--surface);
       border: 1px solid var(--border);
-      border-radius: clamp(8px, 2vw, 14px);
+      border-radius: clamp(8px, 1.2vw, 18px);
       color: var(--text-primary);
       text-decoration: none;
       text-align: center;
-      font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+      font-size: clamp(0.85rem, 1.4vw, 1.5rem);
       font-weight: 500;
       line-height: 1.2;
       word-break: break-word;
@@ -179,7 +177,7 @@
 
     .link-card.featured {
       grid-column: 1 / -1;
-      gap: 4px;
+      gap: clamp(4px, 0.45vw, 8px);
       background-color: #181c1a;
       border-color: #2c3e35;
     }
@@ -190,7 +188,7 @@
     }
 
     .link-subtext {
-      font-size: clamp(0.66rem, 1.8vw, 0.8rem);
+      font-size: clamp(0.68rem, 1vw, 1.1rem);
       font-weight: 400;
       color: var(--text-secondary);
       letter-spacing: 0.01em;
@@ -223,24 +221,17 @@
       }
     }
 
-    /* Tablets & Small Laptops (768px+) */
-    @media (min-width: 768px) {
-      .search-container,
+    /* Wide / Desktop Viewports (1024px+) */
+    @media (min-width: 1024px) {
       .links {
-        max-width: 640px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
-    /* Large Desktops, 4K & Ultrawide Displays (1440px+) */
-    @media (min-width: 1440px) {
-      .search-container,
+    /* Large Desktops, 4K & Ultrawide Displays (1920px+) */
+    @media (min-width: 1920px) {
       .links {
-        max-width: 760px;
-        gap: 16px;
-      }
-
-      .link-card {
-        padding: 18px 28px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
   </style>
